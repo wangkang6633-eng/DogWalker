@@ -1,24 +1,28 @@
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        try {
-            File file = new File("companies.txt");
-            Scanner fileScanner = new Scanner(file);
-            StringBuilder input = new StringBuilder();
+    public static void main(String[] args) throws IOException {
+        File f = new File("companies.txt");
+        Scanner s = new Scanner(f);
 
-            while (fileScanner.hasNextInt()) {
-                input.append(fileScanner.nextInt()).append(" ");
-            }
+        DogWalkCompany[] companies = new DogWalkCompany[100];
 
-            fileScanner.close();
-
-            DogWalkCompany company = new DogWalkCompany(input.toString());
-            company.printSchedule();
-        } catch (FileNotFoundException e) {
-            System.out.println("Could not open companies.txt.");
+        for (int i = 0; i < 100; i++) {
+            companies[i] = new DogWalkCompany(s.nextLine());
         }
+
+        f = new File("walkers.txt");
+        s = new Scanner(f);
+
+        int company = s.nextInt();
+        int maxDogs = s.nextInt();
+        DogWalker walker = new DogWalker(maxDogs, companies[company]);
+
+        int startHour = s.nextInt();
+        int endHour = s.nextInt();
+        int pay = walker.dogWalkShift(startHour, endHour);
+        System.out.println(pay);
     }
 }

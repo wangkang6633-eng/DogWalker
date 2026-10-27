@@ -17,4 +17,21 @@ public class DogWalker {
         company.updateDogs(hour, dogs);
         return dogs;
     }
+
+    public int dogWalkShift(int startHour, int endHour) {
+        int pay = 0;
+
+        while (startHour <= endHour) {
+            int dogs = walkDogs(startHour);
+            pay += dogs * 5;
+
+            if (dogs == maxDogs || startHour >= 9 && startHour <= 17) {
+                pay += 3;
+            }
+
+            startHour++;
+        }
+
+        return pay;
+    }
 }
