@@ -27,8 +27,11 @@ public class Main {
             }
         }
 
+        int totalSalaries = 0;
         for (int i = 0; i < walkerNumber; i++) {
             System.out.println(paychecks[i]);
+            totalSalaries += paychecks[i];
         }
+        System.out.println("Total salaries: " + totalSalaries);
     }
 }
