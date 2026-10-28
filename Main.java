@@ -12,15 +12,23 @@ public class Main {
             }
         }
 
+        int[] paychecks = new int[100];
+        int walkerNumber = 0;
         try (Scanner s = new Scanner(new File("walkers.txt"))) {
-            int company = s.nextInt();
-            int maxDogs = s.nextInt();
-            DogWalker walker = new DogWalker(maxDogs, companies[company]);
+            while (s.hasNextInt()) {
+                int company = s.nextInt();
+                int maxDogs = s.nextInt();
+                DogWalker walker = new DogWalker(maxDogs, companies[company]);
 
-            int startHour = s.nextInt();
-            int endHour = s.nextInt();
-            int pay = walker.dogWalkShift(startHour, endHour);
-            System.out.println(pay);
+                int startHour = s.nextInt();
+                int endHour = s.nextInt();
+                paychecks[walkerNumber] = walker.dogWalkShift(startHour, endHour);
+                walkerNumber++;
+            }
+        }
+
+        for (int i = 0; i < walkerNumber; i++) {
+            System.out.println(paychecks[i]);
         }
     }
 }
